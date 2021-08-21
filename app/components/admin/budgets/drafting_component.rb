@@ -9,4 +9,10 @@ class Admin::Budgets::DraftingComponent < ApplicationComponent
   def render?
     can?(:publish, budget)
   end
+
+  private
+
+    def action(action_name, **options)
+      render Admin::ActionComponent.new(action_name, budget, **options)
+    end
 end

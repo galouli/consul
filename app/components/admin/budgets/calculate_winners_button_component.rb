@@ -12,6 +12,10 @@ class Admin::Budgets::CalculateWinnersButtonComponent < ApplicationComponent
       budget.balloting_or_later?
     end
 
+    def action(action_name, **options)
+      render Admin::ActionComponent.new(action_name, budget, **options)
+    end
+
     def text
       if budget.investments.winners.empty?
         t("admin.budgets.winners.calculate")
