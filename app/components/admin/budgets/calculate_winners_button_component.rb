@@ -10,7 +10,12 @@ class Admin::Budgets::CalculateWinnersButtonComponent < ApplicationComponent
   private
 
     def action(action_name, **options)
-      render Admin::ActionComponent.new(action_name, budget, **options)
+      render Admin::ActionComponent.new(
+        action_name,
+        budget,
+        "aria-describedby": !from_investments || nil,
+        **options
+      )
     end
 
     def text
