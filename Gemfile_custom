@@ -1,8 +1,4 @@
-# Overrides and adds customized gems in this file
-# Read more on documentation: 
-# * English: https://github.com/consul/consul/blob/master/CUSTOMIZE_EN.md#gemfile
-# * Spanish: https://github.com/consul/consul/blob/master/CUSTOMIZE_ES.md#gemfile
-#
+# Add custom gem dependencies in this file.
 
 ###### Application monitoring services ######
 #
@@ -22,7 +18,7 @@
 # gem "sentry-ruby", "insert_gem_version_here"
 
 # Rollbar is an external service which helps you monitor the application errors
-# gem "rollbar", "<insert_gem_version_here>"
+# gem "rollbar", "insert_gem_version_here"
 
 ###### Other gems ######
 #
