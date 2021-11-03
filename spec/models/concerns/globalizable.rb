@@ -11,6 +11,15 @@ shared_examples_for "globalizable" do |factory_name|
   let(:fields) { record.translated_attribute_names }
   let(:required_fields) { fields.select { |field| record.send(:required_attribute?, field) } }
   let(:attribute) { required_fields.sample || fields.sample }
+  let(:invalid_translation_attributes) do
+    Hash.new.tap do |translation_attributes|
+      translation_attributes[:id] = record.translations.find_by(locale: :es).id
+      translation_attributes[attribute] = ""
+      if attribute == :main_link_url && [:budget, :budget_phase].include?(factory_name)
+        translation_attributes[:main_link_text] = "Enlace"
+      end
+    end
+  end
 
   before do
     if factory_name == :budget || factory_name == :budget_phase
@@ -89,9 +98,7 @@ shared_examples_for "globalizable" do |factory_name|
     it "Does not save invalid translations" do
       skip("cannot have invalid translations") if required_fields.empty?
 
-      record.update(translations_attributes: [
-        { id: record.translations.find_by(locale: :es).id, attribute => "" }
-      ])
+      record.update(translations_attributes: invalid_translation_attributes)
 
       I18n.with_locale(:es) { expect(record.send(attribute)).to eq "" }
 
@@ -143,7 +150,7 @@ shared_examples_for "globalizable" do |factory_name|
       skip("cannot have invalid translations") if required_fields.empty?
 
       record.translations_attributes = [
-        { id: record.translations.find_by(locale: :es).id, attribute => "" },
+        invalid_translation_attributes,
         { id: record.translations.find_by(locale: :en).id, _destroy: true }
       ]
 
