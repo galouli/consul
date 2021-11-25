@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>" data-current-user-id="<%= current_user&.id %>">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <%= render "layouts/tracking_data" %>
     <%= render "layouts/meta_tags" %>
     <title><%= content_for?(:title) ? yield(:title) : setting["org_name"] %></title>
@@ -12,62 +12,45 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag "favicon.ico" %>
-    <%= favicon_link_tag image_path_for("apple-touch-icon-200.png"),
-                     rel: "icon apple-touch-icon",
-                     sizes: "200x200",
-                     type: "image/png" %>
+    <%= favicon_link_tag image_path_for("apple-touch-icon-200.png"), rel: "icon apple-touch-icon", sizes: "200x200", type: "image/png" %>
     <%= content_for :social_media_meta_tags %>
 
     <%= raw setting["per_page_code_head"] %>
   </head>
-  <body>
+  <body class="vh-100">
     <%= raw setting["per_page_code_body"] %>
-
-
-    <div class="container">
-      <div class="row pt-5 pt-md-0">
-        <div class="col-12 col-lg-4 mb-3 mb-lg-0">
-          <div class="card border-gray-300 p-2">
-            <div class="card-header bg-white border-0 text-center d-flex flex-row flex-lg-column align-items-center justify-content-center px-1 px-lg-4">
-              <span class="h5 my-0 my-lg-3 me-3 me-lg-0">
-
-
-                    <%= t("proposals.show.dashboard_proposal_link") %>
-
-
-                </span>
-
-          </div>
-
-    </div>
-    </div>
-
-  </div>
-  </div>
-
-
-
-
-    <h1 class="show-for-sr"><%= setting["org_name"] %></h1>
-
     <%= render "layouts/header", with_subnavigation: false %>
+    <main class="bg-gray-200">
 
-    <div class="menu-and-content">
-      <%= check_box_tag :show_menu, nil, false, role: "switch" %>
+      <section class="section py-3 py-md-6">
+        <div class="container">
+          <div class="row pt-5 pt-md-0 justify-content-center">
+            <div class="col-12 col-lg-4 mb-3 mb-lg-0">
+              <div class="card border-gray-300 p-2">
+                <div class="card-header bg-white border-0 text-center d-flex flex-row flex-lg-column align-items-center justify-content-center px-1 px-lg-4">
 
-      <nav id="side_menu" class="dashboard-sidebar">
-        <%= render "dashboard/menu" %>
-      </nav>
-
-      <div class="admin-content">
-        <%= label_tag :show_menu, t("admin.menu.admin"),
-                      "aria-hidden": true, class: "button hollow expanded" %>
-
-        <%= render "layouts/flash" %>
-        <%= render "layouts/dashboard/proposal_totals" %>
-        <%= render "layouts/dashboard/proposal_header" %>
-        <%= yield %>
+                  <%= back_link_to user_path(current_user) %>
+                  <span class="h5 my-0 my-lg-3 me-3 me-lg-0"><%= t("proposals.show.dashboard_proposal_link") %></span>
+              </div>
+                <%= render "dashboard/menu" %>
+              </div>
+            </div>
+          <div class="col-12 col-lg-8">
+          <div class="row">
+          <div class="col-lg-12">
+          <div class="card card-body bg-white border-gray-300 mb-4">
+                <%= render "layouts/flash" %>
+                <%= render "layouts/dashboard/proposal_totals" %>
+                <%= render "layouts/dashboard/proposal_header" %>
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+      </section>
+    </main>
+    <%= render "layouts/footer" %>
   </body>
 </html>
