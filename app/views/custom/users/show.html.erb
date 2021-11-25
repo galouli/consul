@@ -53,23 +53,18 @@
 
   </div>
 </div>
-</div>
-</div>
-
-<div class="col-12 d-lg-none">
-<div class="card bg-white border-gray-300 mb-4 mb-lg-5">
-<div class="card-body">
+<div class="card-body d-lg-none">
   <div class="row align-items-center">
     <div class="col-10 d-flex flex-wrap">
       <%= link_to account_path, class:"list-group-item list-group-item-action border-0 text-center me-2", rel: "nofollow", title: t("shared.go_to_page") + t("layouts.header.my_account_link") do %>
       <%= t("account.show.title") %>
     <% end %>
 
-    <%= link_to user_path(current_user), class:"list-group-item list-group-item-action border-0 text-center me-2", rel: "nofollow", title: t("shared.go_to_page") + t("layouts.header.my_activity_link") do %>
+    <%= link_to "#", class:"list-group-item list-group-item-action border-0 text-center me-2 active", rel: "nofollow", title: t("shared.go_to_page") + t("layouts.header.my_activity_link") do %>
     <%= t("layouts.header.my_activity_link")%>
   <% end %>
 
-  <%= link_to "#", class: "list-group-item list-group-item-action border-0 text-center me-2 active" do %>
+  <%= link_to notifications_path, class: "list-group-item list-group-item-action border-0 text-center me-2" do %>
   <%= t("notifications.index.title") %>
 
 <% end %>

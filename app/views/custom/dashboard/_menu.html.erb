@@ -1,3 +1,5 @@
+
+
 <div class="card-body p-2 d-none d-lg-block">
   <div class="list-group dashboard-menu list-group-sm">
 
@@ -71,5 +73,83 @@
 </span>
 <% end %>
 
+</div>
+</div>
+
+<div class="card-body d-lg-none">
+<div class="row align-items-center">
+  <div class="col-10 d-flex flex-wrap">
+
+    <%= link_to progress_proposal_dashboard_path(proposal.to_param), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if progress_menu_active?}" do %>
+    <i class="fas fa-chart-line mx-2 pt-1"></i>
+    <%= t("dashboard.menu.progress") %>
+    <span class="icon icon-xs ms-auto">
+      <span class="fas fa-chevron-right"></span>
+    </span>
+  <% end %>
+
+  <%= link_to proposal_dashboard_path(proposal.to_param), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if my_proposal_menu_active?}" do %>
+  <i class="fas fa-edit mx-2 pt-1"></i>
+  <%= t("dashboard.menu.my_proposal") %>
+  <span class="icon icon-xs ms-auto">
+    <span class="fas fa-chevron-right"></span>
+  </span>
+  <% end %>
+
+  <% if can?(:manage_polls, proposal) %>
+  <%= link_to proposal_dashboard_polls_path(proposal), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if polls_menu_active?}" do %>
+  <i class="fas fa-poll mx-2 pt-1"></i>
+  <%= t("dashboard.menu.polls") %>
+  <span class="icon icon-xs ms-auto">
+    <span class="fas fa-chevron-right"></span>
+  </span>
+  <% end %>
+  <% end %>
+
+  <% if can?(:manage_mailing, proposal) %>
+  <%= link_to new_proposal_dashboard_mailing_path(proposal), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if mailing_menu_active?}" do %>
+  <i class="fas fa-mail-bulk mx-2 pt-1"></i>
+  <%= t("dashboard.menu.mailing") %>
+  <span class="icon icon-xs ms-auto">
+  <span class="fas fa-chevron-right"></span>
+  </span>
+  <% end %>
+  <% end %>
+
+  <% if can?(:manage_poster, proposal) %>
+  <%= link_to new_proposal_dashboard_poster_path(proposal), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if poster_menu_active?}" do %>
+  <i class="fas fa-scroll mx-2 pt-1"></i>
+  <%= t("dashboard.menu.poster") %>
+  <span class="icon icon-xs ms-auto">
+  <span class="fas fa-chevron-right"></span>
+  </span>
+  <% end %>
+  <% end %>
+
+  <%= link_to community_proposal_dashboard_path(proposal), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if community_menu_active?}" do %>
+  <i class="fas fa-users mx-2 pt-1"></i>
+  <%= t("dashboard.menu.community") %>
+  <span class="icon icon-xs ms-auto">
+  <span class="fas fa-chevron-right"></span>
+  </span>
+  <% end %>
+
+  <%= link_to messages_proposal_dashboard_path(proposal), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if messages_menu_active?}" do %>
+  <i class="fas fa-share-square mx-2 pt-1"></i>
+  <%= t("dashboard.menu.messages") %>
+  <span class="icon icon-xs ms-auto">
+  <span class="fas fa-chevron-right"></span>
+  </span>
+  <% end %>
+
+  <%= link_to related_content_proposal_dashboard_path(proposal), class:"list-group-item list-group-item-action border-0 text-center me-2 #{'active' if related_content_menu_active?}" do %>
+  <i class="fas fa-link mx-2 pt-1"></i>
+  <%= t("dashboard.menu.related_content") %>
+  <span class="icon icon-xs ms-auto">
+  <span class="fas fa-chevron-right"></span>
+  </span>
+  <% end %>
+
+</div>
 </div>
 </div>
